@@ -22,6 +22,7 @@
 		D5E551832957165300DB2312 /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551822957165300DB2312 /* CoinRowView.swift */; };
 		D5E551852957177A00DB2312 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551842957177A00DB2312 /* PreviewProvider.swift */; };
 		D5E551872957291C00DB2312 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551862957291C00DB2312 /* Double.swift */; };
+		D5E551892957349400DB2312 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551882957349400DB2312 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		D5E551822957165300DB2312 /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		D5E551842957177A00DB2312 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		D5E551862957291C00DB2312 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		D5E551882957349400DB2312 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 		D5E551752956F72E00DB2312 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D5E551882957349400DB2312 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5E551832957165300DB2312 /* CoinRowView.swift in Sources */,
+				D5E551892957349400DB2312 /* HomeViewModel.swift in Sources */,
 				D5E551462956EB9900DB2312 /* ContentView.swift in Sources */,
 				D5E551772956F77800DB2312 /* HomeView.swift in Sources */,
 				D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */,

@@ -16,6 +16,7 @@
 		D5E551612956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551602956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift */; };
 		D5E551712956F03200DB2312 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551702956F03200DB2312 /* Color.swift */; };
 		D5E5517B2956F99900DB2312 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E5517A2956F99900DB2312 /* CircleButtonView.swift */; };
+		D5E5517E295701DA00DB2312 /* CircleButtonAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E5517D295701DA00DB2312 /* CircleButtonAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D5E551602956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCryptoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D5E551702956F03200DB2312 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D5E5517A2956F99900DB2312 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
+		D5E5517D295701DA00DB2312 /* CircleButtonAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonAnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 				D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */,
 				D5E5517B2956F99900DB2312 /* CircleButtonView.swift in Sources */,
 				D5E551712956F03200DB2312 /* Color.swift in Sources */,
+				D5E5517E295701DA00DB2312 /* CircleButtonAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

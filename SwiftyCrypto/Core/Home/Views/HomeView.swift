@@ -19,7 +19,17 @@ struct HomeView: View {
             
             VStack {
                 header
-                    
+
+                if !showPortfolio {
+                    allCoins
+                        .transition(.move(edge: .leading))
+                }
+                
+                if showPortfolio {
+                    portfolioCoins
+                        .transition(.move(edge: .trailing))
+                }
+                
                 Spacer(minLength: .zero)
             }
         }
@@ -64,4 +74,21 @@ extension HomeView {
 
     }
     
+    private var allCoins: some View {
+        List {
+            ForEach(vm.allCoins) { coin in
+                CoinRowView(coin: coin, showHoldings: false)
+                    .listRowInsets(.init(top: 12, leading: .zero, bottom: 12, trailing: 12))
+            }
+        }.listStyle(.plain)
+    }
+    
+    private var portfolioCoins: some View {
+        List {
+            ForEach(vm.portfolioCoins) { coin in
+                CoinRowView(coin: coin, showHoldings: true)
+                    .listRowInsets(.init(top: 12, leading: .zero, bottom: 12, trailing: 12))
+            }
+        }.listStyle(.plain)
+    }
 }

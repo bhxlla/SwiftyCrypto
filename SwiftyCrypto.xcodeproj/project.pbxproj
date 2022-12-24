@@ -15,6 +15,7 @@
 		D5E5515F2956EB9D00DB2312 /* SwiftyCryptoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E5515E2956EB9D00DB2312 /* SwiftyCryptoUITests.swift */; };
 		D5E551612956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551602956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift */; };
 		D5E551712956F03200DB2312 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551702956F03200DB2312 /* Color.swift */; };
+		D5E5517B2956F99900DB2312 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E5517A2956F99900DB2312 /* CircleButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		D5E5515E2956EB9D00DB2312 /* SwiftyCryptoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCryptoUITests.swift; sourceTree = "<group>"; };
 		D5E551602956EB9D00DB2312 /* SwiftyCryptoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCryptoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D5E551702956F03200DB2312 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D5E5517A2956F99900DB2312 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D5E5516F2956F01D00DB2312 /* Extensions */,
+				D5E551722956F71E00DB2312 /* Core */,
 				D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */,
 				D5E551452956EB9900DB2312 /* ContentView.swift */,
 				D5E551472956EB9C00DB2312 /* Assets.xcassets */,
@@ -270,6 +273,7 @@
 			files = (
 				D5E551462956EB9900DB2312 /* ContentView.swift in Sources */,
 				D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */,
+				D5E5517B2956F99900DB2312 /* CircleButtonView.swift in Sources */,
 				D5E551712956F03200DB2312 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

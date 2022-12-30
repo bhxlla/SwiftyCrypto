@@ -12,9 +12,15 @@ class HomeViewModel: ObservableObject {
     @Published var allCoins: [Coin] = .init()
     @Published var portfolioCoins: [Coin] = .init()
     
+    private let service: CoinService = CoinService()
+    
     init() {
-        
-        
+        subscribeToCoins()
+    }
+    
+    func subscribeToCoins(){
+        service.$allCoins
+            .assign(to: &$allCoins)
     }
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D50F4E7F295F685D005E8D4D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50F4E7E295F685D005E8D4D /* NetworkManager.swift */; };
 		D5AF0E8B295E2BC700C914C2 /* CoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AF0E8A295E2BC700C914C2 /* CoinService.swift */; };
 		D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */; };
 		D5E551462956EB9900DB2312 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551452956EB9900DB2312 /* ContentView.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D50F4E7E295F685D005E8D4D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D5AF0E8A295E2BC700C914C2 /* CoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinService.swift; sourceTree = "<group>"; };
 		D5E551402956EB9900DB2312 /* SwiftyCrypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyCrypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCryptoApp.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D50F4E7D295F6848005E8D4D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D50F4E7E295F685D005E8D4D /* NetworkManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		D5AF0E89295E2BB100C914C2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +132,7 @@
 		D5E551422956EB9900DB2312 /* SwiftyCrypto */ = {
 			isa = PBXGroup;
 			children = (
+				D50F4E7D295F6848005E8D4D /* Utilities */,
 				D5AF0E89295E2BB100C914C2 /* Service */,
 				D5E5516F2956F01D00DB2312 /* Extensions */,
 				D5E5517F29570D6300DB2312 /* Models */,
@@ -370,6 +381,7 @@
 				D5E551832957165300DB2312 /* CoinRowView.swift in Sources */,
 				D5E551892957349400DB2312 /* HomeViewModel.swift in Sources */,
 				D5E551462956EB9900DB2312 /* ContentView.swift in Sources */,
+				D50F4E7F295F685D005E8D4D /* NetworkManager.swift in Sources */,
 				D5E551772956F77800DB2312 /* HomeView.swift in Sources */,
 				D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */,
 				D5E5517B2956F99900DB2312 /* CircleButtonView.swift in Sources */,

@@ -23,13 +23,8 @@ class CoinService {
     private func getCoins(){
         guard let url = URL(string: urlString) else { return }
         
-        cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { (data: Data, response: URLResponse) in
-                guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
-                    throw URLError(.badServerResponse)
-                }
-                return data
-            }.decode(type: [Coin].self, decoder: decoder)
+        cancellable = NetworkManager.download(for: url)
+            .decode(type: [Coin].self, decoder: decoder)
             .sink { [weak self] result in
                 if case let .failure(err) = result {
                     print(err.localizedDescription)

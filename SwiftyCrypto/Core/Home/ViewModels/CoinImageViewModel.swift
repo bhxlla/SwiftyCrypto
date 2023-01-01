@@ -13,7 +13,7 @@ class CoinImageViewModel: ObservableObject {
     let coin: Coin
     
     @Published var image: UIImage?
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     var cancellables: Set<AnyCancellable> = .init()
     var coinService = CoinImageService()
     

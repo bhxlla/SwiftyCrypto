@@ -11,6 +11,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var allCoins: [Coin] = .init()
     @Published var portfolioCoins: [Coin] = .init()
+    @Published var searchText = ""
     
     private let service: CoinService = CoinService()
     

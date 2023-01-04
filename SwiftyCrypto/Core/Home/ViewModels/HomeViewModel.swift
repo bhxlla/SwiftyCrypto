@@ -21,7 +21,16 @@ class HomeViewModel: ObservableObject {
     
     func subscribeToCoins(){
         service.$allCoins
-            .assign(to: &$allCoins)
+            .combineLatest($searchText)
+            .debounce(for: .seconds(0.6), scheduler: DispatchQueue.main)
+            .map { (coins, text) in
+                if text.isEmpty { return coins }
+                return coins.filter { coin in
+                    coin.name.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces)) ||
+                    coin.symbol.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces)) ||
+                    coin.id.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces))
+                }
+            }.assign(to: &$allCoins)
     }
     
 }

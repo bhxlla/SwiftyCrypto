@@ -221,5 +221,9 @@ class DeveloperPreview {
        currentHoldings: 1.5
     )
     
+    let statistic1: Statistics = .init(title: "Market Cap", value: "$20.5Bn", percentChange: 24)
+    let statistic2: Statistics = .init(title: "Volume", value: "$1.5Tr", percentChange: nil)
+    let statistic3: Statistics = .init(title: "Portfolio", value: "$50.4k", percentChange: -12.7)
+    let statistic4: Statistics = .init(title: "Watchlist", value: "$24.5k")    
 }
 

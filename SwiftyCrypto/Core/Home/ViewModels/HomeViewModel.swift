@@ -12,9 +12,10 @@ class HomeViewModel: ObservableObject {
     @Published var allCoins: [Coin] = .init()
     @Published var portfolioCoins: [Coin] = .init()
     @Published var searchText = ""
-    @Published var statistics: [Statistics] = [.init(title: "Title1", value: "Value1", percentChange: 23), .init(title: "Title2", value: "Value2"), .init(title: "Title3", value: "Value3", percentChange: -41), .init(title: "Title4", value: "Value4")]
+    @Published var statistics: [Statistics] = .init()
     
     private let service: CoinService = CoinService()
+    private let marketService: MarketService = MarketService()
     
     init() {
         subscribeToCoins()
@@ -32,6 +33,21 @@ class HomeViewModel: ObservableObject {
                     coin.id.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces))
                 }
             }.assign(to: &$allCoins)
+        
+        marketService.$marketData
+            .map { marketData in
+                var stats: [Statistics] = .init()
+                guard let marketData else {return stats}
+                
+                stats.append(contentsOf: [
+                    .init(title: "Market Cap", value: marketData.marketCap, percentChange: marketData.marketCapChangePercentage24HUsd),
+                    .init(title: "24h Volume", value: marketData.volume),
+                    .init(title: "BTC Dominance", value: marketData.btcDominance),
+                    .init(title: "Portfolio", value: "$0.00", percentChange: .zero)
+                ])
+                
+                return stats
+            }.assign(to: &$statistics)
     }
     
 }

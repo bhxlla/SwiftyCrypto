@@ -10,6 +10,11 @@ import SwiftUI
 @main
 struct SwiftyCryptoApp: App {
     
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
+    }
+    
     @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some Scene {

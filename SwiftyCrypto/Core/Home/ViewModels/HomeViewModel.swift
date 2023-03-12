@@ -16,6 +16,7 @@ class HomeViewModel: ObservableObject {
     
     private let service: CoinService = CoinService()
     private let marketService: MarketService = MarketService()
+    private let dataService: PortfolioDataService = PortfolioDataService()
     
     init() {
         subscribeToCoins()
@@ -48,6 +49,25 @@ class HomeViewModel: ObservableObject {
                 
                 return stats
             }.assign(to: &$statistics)
+        
+        $allCoins
+            .combineLatest(dataService.$portfolio)
+            .compactMap { (coins: [Coin], portfolios: [Portfolio]) -> [Coin] in
+                coins.compactMap { coin in
+                    guard let folio = portfolios.first(where: { $0.coinId == coin.id }) else { return nil }
+                    return coin.updateHoldings(with: folio.amount)
+                }
+            }
+//            .removeDuplicates(by: { coins1, coins2 in coins1.isEmpty && coins2.isEmpty })
+            .assign(to: &$portfolioCoins)
+    }
+    
+    func updateFolio(coin: Coin, amount: Double) {
+        dataService.update(coin: coin, with: amount)
+    }
+  
+    var personalisedCoinsList: [Coin] {
+        portfolioCoins + allCoins.filter{ coin in !portfolioCoins.contains { $0.id == coin.id } }
     }
     
 }

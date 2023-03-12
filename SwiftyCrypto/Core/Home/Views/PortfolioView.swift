@@ -47,6 +47,11 @@ struct PortfolioView: View {
                         .font(.headline)
                     }
                 }
+                .onChange(of: homeViewModel.searchText) { newValue in
+                    if newValue.isEmpty {
+                        selectedCoin = nil
+                    }
+                }
         }
     }
     

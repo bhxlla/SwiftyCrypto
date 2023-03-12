@@ -20,7 +20,7 @@ class CoinService {
         getCoins()
     }
     
-    private func getCoins(){
+    func getCoins(){
         guard let url = URL(string: urlString) else { return }
         
         cancellable = NetworkManager.download(for: url)

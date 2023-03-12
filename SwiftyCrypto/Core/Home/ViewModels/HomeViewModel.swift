@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published var portfolioCoins: [Coin] = .init()
     @Published var searchText = ""
     @Published var statistics: [Statistics] = .init()
+    @Published var isReloading = false
     
     private let service: CoinService = CoinService()
     private let marketService: MarketService = MarketService()
@@ -34,7 +35,18 @@ class HomeViewModel: ObservableObject {
                     coin.id.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces))
                 }
             }.assign(to: &$allCoins)
-        
+
+        $allCoins
+            .combineLatest(dataService.$portfolio)
+            .compactMap { (coins: [Coin], portfolios: [Portfolio]) -> [Coin] in
+                coins.compactMap { coin in
+                    guard let folio = portfolios.first(where: { $0.coinId == coin.id }) else { return nil }
+                    return coin.updateHoldings(with: folio.amount)
+                }
+            }
+//            .removeDuplicates(by: { coins1, coins2 in coins1.isEmpty && coins2.isEmpty })
+            .assign(to: &$portfolioCoins)
+
         marketService.$marketData
             .map { marketData in
                 var stats: [Statistics] = .init()
@@ -51,15 +63,10 @@ class HomeViewModel: ObservableObject {
             }.assign(to: &$statistics)
         
         $allCoins
-            .combineLatest(dataService.$portfolio)
-            .compactMap { (coins: [Coin], portfolios: [Portfolio]) -> [Coin] in
-                coins.compactMap { coin in
-                    guard let folio = portfolios.first(where: { $0.coinId == coin.id }) else { return nil }
-                    return coin.updateHoldings(with: folio.amount)
-                }
-            }
-//            .removeDuplicates(by: { coins1, coins2 in coins1.isEmpty && coins2.isEmpty })
-            .assign(to: &$portfolioCoins)
+            .combineLatest(marketService.$marketData)
+            .map { coins, marketService in false }
+            .assign(to: &$isReloading)
+        
     }
     
     func updateFolio(coin: Coin, amount: Double) {
@@ -68,6 +75,13 @@ class HomeViewModel: ObservableObject {
   
     var personalisedCoinsList: [Coin] {
         portfolioCoins + allCoins.filter{ coin in !portfolioCoins.contains { $0.id == coin.id } }
+    }
+    
+    func reloadData() {
+        isReloading = true
+        service.getCoins()
+        marketService.getData()
+        HapticManager.notify(type: .success)
     }
     
 }

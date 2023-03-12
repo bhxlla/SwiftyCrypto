@@ -48,15 +48,25 @@ class HomeViewModel: ObservableObject {
             .assign(to: &$portfolioCoins)
 
         marketService.$marketData
-            .map { marketData in
+            .combineLatest($portfolioCoins)
+            .map { marketData, coins in
                 var stats: [Statistics] = .init()
                 guard let marketData else {return stats}
+                
+                let portfolioValue = coins.map { $0.currentHoldingsValue }.reduce(0, +)
+                
+                let previousValue = coins.map { coin in
+                    let priceChange = coin.priceChangePercentage24H ?? 0.0
+                    return coin.currentHoldingsValue / (1 + ( priceChange / 100))
+                }.reduce(0.0, +)
+                
+                let percentDiff = ((portfolioValue - previousValue) / previousValue) * 100
                 
                 stats.append(contentsOf: [
                     .init(title: "Market Cap", value: marketData.marketCap, percentChange: marketData.marketCapChangePercentage24HUsd),
                     .init(title: "24h Volume", value: marketData.volume),
                     .init(title: "BTC Dominance", value: marketData.btcDominance),
-                    .init(title: "Portfolio", value: "$0.00", percentChange: .zero)
+                    .init(title: "Portfolio", value: portfolioValue.asCurrencyWith2, percentChange: percentDiff)
                 ])
                 
                 return stats

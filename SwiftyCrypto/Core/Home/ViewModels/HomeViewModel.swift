@@ -9,11 +9,42 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
+    enum SortType {
+        case rank, rankReversed, holding, holdingReversed, price, priceReversed
+        
+        func sortCoins() -> ((Coin, Coin) -> Bool)   {
+            switch self {
+            case .holding, .rank:
+                return { $0.marketRank < $1.marketRank }
+            case .holdingReversed, .rankReversed:
+                return { $0.marketRank > $1.marketRank }
+            case .price:
+                return { $0.currentPrice > $1.currentPrice }
+            case .priceReversed:
+                return { $0.currentPrice < $1.currentPrice }
+            }
+        }
+        
+        var imageName: String {
+            switch self {
+                case .holding, .price, .rank:
+                    return "chevron.up"
+                case .holdingReversed, .priceReversed, .rankReversed:
+                    return "chevron.down"
+            }
+        }
+        
+        var isRankSort: Bool { self == .rank || self == .rankReversed }
+        var isPriceSort: Bool { self == .price || self == .priceReversed }
+        var isHoldingsSort: Bool { self == .holding || self == .holdingReversed }        
+    }
+    
     @Published var allCoins: [Coin] = .init()
     @Published var portfolioCoins: [Coin] = .init()
     @Published var searchText = ""
     @Published var statistics: [Statistics] = .init()
     @Published var isReloading = false
+    @Published var sortType: SortType = .holding
     
     private let service: CoinService = CoinService()
     private let marketService: MarketService = MarketService()
@@ -25,16 +56,18 @@ class HomeViewModel: ObservableObject {
     
     func subscribeToCoins(){
         service.$allCoins
-            .combineLatest($searchText)
+            .combineLatest($searchText, $sortType)
             .debounce(for: .seconds(0.6), scheduler: DispatchQueue.main)
-            .map { (coins, text) in
-                if text.isEmpty { return coins }
-                return coins.filter { coin in
+            .map { (coins, text, sort) in
+                var result = text.isEmpty ? coins : coins.filter { coin in
                     coin.name.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces)) ||
                     coin.symbol.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces)) ||
                     coin.id.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespaces))
                 }
-            }.assign(to: &$allCoins)
+                result.sort(by: sort.sortCoins())
+                return result
+            }
+            .assign(to: &$allCoins)
 
         $allCoins
             .combineLatest(dataService.$portfolio)

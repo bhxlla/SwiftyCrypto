@@ -107,13 +107,39 @@ extension HomeView {
     
     private var columnTitles: some View {
         HStack {
-            Text("Coin")
+            Button {
+                vm.sortType = vm.sortType == .rank ? .rankReversed : .rank
+            } label: {
+                HStack(spacing: 4){
+                    Text("Coin")
+                    Image(systemName: vm.sortType.imageName)
+                        .opacity(vm.sortType.isRankSort ? 1 : 0)
+                }
+            }
+
             Spacer()
             if showPortfolio {
-                Text("Holdings")
+                Button {
+                    vm.sortType = vm.sortType == .holding ? .holdingReversed : .holding
+                } label: {
+                    HStack(spacing: 4){
+                        Text("Holdings")
+                        Image(systemName: vm.sortType.imageName)
+                            .opacity(vm.sortType.isHoldingsSort ? 1 : 0)
+                    }
+                }
             }
-            Text("Price")
-                .frame(minWidth: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+            
+            Button {
+                vm.sortType = vm.sortType == .price ? .priceReversed : .price
+            } label: {
+                HStack(spacing: 4){
+                    Text("Price")
+                    Image(systemName: vm.sortType.imageName)
+                        .opacity(vm.sortType.isPriceSort ? 1 : 0)
+                }
+            }
+            .frame(minWidth: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
             
             Button {
                 withAnimation(.linear(duration: 2)) {

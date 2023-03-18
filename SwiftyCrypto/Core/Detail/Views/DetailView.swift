@@ -35,6 +35,7 @@ struct DetailView: View {
     let coin: Coin
 
     @StateObject var detailViewModel: DetailViewModel
+    @State var viewFullDescription: Bool = false
 
     init(coin: Coin) {
         self.coin = coin
@@ -47,11 +48,13 @@ struct DetailView: View {
                 VStack(spacing: 18) {
                     
                     ChartView(coin: coin)
-                        .frame(height: 160)
+                        .frame(height: 240)
                     
                     overviewTitle
                     
                     Divider()
+                    
+                    descriptionSection
                     
                     overviewDetails
                         .padding(.horizontal)
@@ -62,6 +65,8 @@ struct DetailView: View {
                     
                     additionalDetails
                         .padding(.horizontal)
+                    
+                    bottomLinks
                     
                 }.padding(.horizontal)
             }
@@ -118,6 +123,41 @@ struct DetailView: View {
             }            
         }
     }
+    
+    private var descriptionSection: some View {
+        ZStack {
+            if let description = detailViewModel.info?.description, !description.isEmpty {
+                Text(description)
+                    .lineLimit(viewFullDescription ? nil : 3)
+                    .font(.callout)
+                    .foregroundColor(.theme.secondaryText)
+                    .onTapGesture {
+                        withAnimation(viewFullDescription ? .none : .easeIn) {
+                            viewFullDescription.toggle()
+                        }
+                    }
+            }
+        }
+    }
+    
+    private var bottomLinks: some View {
+        HStack(spacing: 32) {
+            if let webLink = detailViewModel.info?.websiteUrl, let url = URL(string: webLink) {
+                Link(destination: url) {
+                    Text("Website")
+                        .foregroundColor(.blue)
+                }
+            }
+            
+            if let redditLink = detailViewModel.info?.redditUrl, let redditUrl = URL(string: redditLink) {
+                Link(destination: redditUrl) {
+                    Text("Reddit")
+                        .foregroundColor(.blue)
+                }
+            }
+        }.font(.callout.bold())
+    }
+    
 }
 
 struct DetailView_Previews: PreviewProvider {

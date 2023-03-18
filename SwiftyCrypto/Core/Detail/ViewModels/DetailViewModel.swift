@@ -13,6 +13,7 @@ class DetailViewModel: ObservableObject {
     let coin: Coin
     
     @Published var detail: (overview: [Statistics], additionalDetails: [Statistics]) = ([], [])
+    @Published var info: (description: String?, websiteUrl: String?, redditUrl: String?)? = nil
     
     private let detailService: CoinDetailService
     
@@ -30,6 +31,11 @@ class DetailViewModel: ObservableObject {
             .combineLatest(Just(coin))
             .map(createStats)
             .assign(to: &$detail)
+        
+        detailService.$detail
+            .map { detail in (detail?.description?.en?.withRemovedHtml, detail?.links?.homepage?.first, detail?.links?.subreddit_url) }
+            .assign(to: &$info)
+        
     }
     
     func createStats(detail: CoinDetail?, coin: Coin) -> (overview: [Statistics], additionalDetails: [Statistics]) {

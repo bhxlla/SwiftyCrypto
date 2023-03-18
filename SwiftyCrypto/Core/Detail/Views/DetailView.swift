@@ -23,19 +23,95 @@ struct DetailScreen: View {
     }
 }
 
+/*
+ 
+ https://www.youtube.com/watch?v=yXSC6jTkLP4
+ refetches everytime we visit this screen, can use NSCache.
+ 
+ */
+
 struct DetailView: View {
     
     let coin: Coin
+
+    @StateObject var detailViewModel: DetailViewModel
+
+    init(coin: Coin) {
+        self.coin = coin
+        self._detailViewModel = .init(wrappedValue: .init(coin: coin))
+    }
     
     var body: some View {
         VStack {
-            Text(coin.name)
+            ScrollView {
+                VStack(spacing: 18) {
+                    Text("")
+                        .frame(height: 160)
+                    
+                    overviewTitle
+                    
+                    Divider()
+                    
+                    overviewDetails
+                        .padding(.horizontal)
+                    
+                    additionalTitle
+                    
+                    Divider()
+                    
+                    additionalDetails
+                        .padding(.horizontal)
+                    
+                }.padding(.horizontal)
+            }
+        }.navigationTitle(coin.name)
+    }
+
+    private var overviewTitle: some View {
+        Text("Overview")
+            .font(.title.bold())
+            .foregroundColor(.theme.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var additionalTitle: some View {
+        Text("Additional Details")
+            .font(.title.bold())
+            .foregroundColor(.theme.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var additionalDetails: some View {
+        LazyVGrid(
+            columns: [GridItem.init(.flexible()), GridItem.init(.flexible())],
+            alignment: .leading,
+            spacing: 24,
+            pinnedViews: []
+        ) {
+            ForEach(detailViewModel.detail.additionalDetails) { stat in
+                StatsView(stat: stat)
+            }
+        }
+    }
+    
+    private var overviewDetails: some View {
+        LazyVGrid(
+            columns: [GridItem.init(.flexible()), GridItem.init(.flexible())],
+            alignment: .leading,
+            spacing: 24,
+            pinnedViews: []
+        ) {
+            ForEach(detailViewModel.detail.overview) { stat in
+                StatsView(stat: stat)
+            }            
         }
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(coin: dev.coin)
+        NavigationView {
+            DetailView(coin: dev.coin)
+        }
     }
 }

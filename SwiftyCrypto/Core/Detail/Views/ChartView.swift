@@ -63,7 +63,7 @@ struct ChartView: View {
                         Divider()
                             .overlay(Color.theme.accent)
                             .offset(x: offsetX)
-                            .opacity((dragValue == nil) && !canShowLiveValue ? 0 : 1)
+                            .opacity((dragValue == nil) || !canShowLiveValue ? 0 : 1)
                     }
                 }
             

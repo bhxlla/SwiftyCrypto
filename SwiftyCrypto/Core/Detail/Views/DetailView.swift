@@ -65,6 +65,17 @@ struct DetailView: View {
                 }.padding(.horizontal)
             }
         }.navigationTitle(coin.name)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack {
+                        Text("\(coin.symbol.uppercased())")
+                            .font(.headline)
+                            .foregroundColor(.theme.secondaryText)
+                        CoinImageView(coin: coin)
+                            .frame(width: 24, height: 24)
+                    }
+                }
+            }
     }
 
     private var overviewTitle: some View {

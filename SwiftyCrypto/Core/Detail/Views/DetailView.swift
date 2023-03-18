@@ -45,7 +45,8 @@ struct DetailView: View {
         VStack {
             ScrollView {
                 VStack(spacing: 18) {
-                    Text("")
+                    
+                    ChartView(coin: coin)
                         .frame(height: 160)
                     
                     overviewTitle

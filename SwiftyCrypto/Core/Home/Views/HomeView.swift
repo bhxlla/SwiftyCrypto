@@ -16,6 +16,8 @@ struct HomeView: View {
     @State var selectedNavCoin: Coin? = nil
     @State var showDetail: Bool = false
     
+    @State var infoSelected: Bool = false
+    
     var body: some View {
         ZStack {
             Color.theme.background
@@ -43,6 +45,10 @@ struct HomeView: View {
                 
                 Spacer(minLength: .zero)
             }
+            .sheet(isPresented: $infoSelected) {
+                SettingsView()
+            }
+            
         }.background {
             NavigationLink(destination: DetailScreen(coin: $selectedNavCoin), isActive: $showDetail) {
                 EmptyView()
@@ -72,6 +78,8 @@ extension HomeView {
                 .onTapGesture {
                     if showPortfolio {
                         showPortfolioView.toggle()
+                    } else {
+                        infoSelected.toggle()
                     }
                 }
             Spacer()

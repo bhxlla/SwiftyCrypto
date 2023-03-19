@@ -36,7 +36,6 @@
 		D5C833212992CE1A0070E93B /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C833202992CE1A0070E93B /* MarketData.swift */; };
 		D5C833232992D31B0070E93B /* MarketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C833222992D31B0070E93B /* MarketService.swift */; };
 		D5E551442956EB9900DB2312 /* SwiftyCryptoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */; };
-		D5E551462956EB9900DB2312 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551452956EB9900DB2312 /* ContentView.swift */; };
 		D5E551482956EB9C00DB2312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E551472956EB9C00DB2312 /* Assets.xcassets */; };
 		D5E5514B2956EB9C00DB2312 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E5514A2956EB9C00DB2312 /* Preview Assets.xcassets */; };
 		D5E551552956EB9C00DB2312 /* SwiftyCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E551542956EB9C00DB2312 /* SwiftyCryptoTests.swift */; };
@@ -101,7 +100,6 @@
 		D5C833222992D31B0070E93B /* MarketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketService.swift; sourceTree = "<group>"; };
 		D5E551402956EB9900DB2312 /* SwiftyCrypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyCrypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyCryptoApp.swift; sourceTree = "<group>"; };
-		D5E551452956EB9900DB2312 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D5E551472956EB9C00DB2312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5E5514A2956EB9C00DB2312 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D5E551502956EB9C00DB2312 /* SwiftyCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,7 +254,6 @@
 				D5E5517F29570D6300DB2312 /* Models */,
 				D5E551722956F71E00DB2312 /* Core */,
 				D5E551432956EB9900DB2312 /* SwiftyCryptoApp.swift */,
-				D5E551452956EB9900DB2312 /* ContentView.swift */,
 				D5E551472956EB9C00DB2312 /* Assets.xcassets */,
 				D5E551492956EB9C00DB2312 /* Preview Content */,
 			);
@@ -517,7 +514,6 @@
 				D5E551832957165300DB2312 /* CoinRowView.swift in Sources */,
 				D5E551892957349400DB2312 /* HomeViewModel.swift in Sources */,
 				D57D857529C61EE30028D957 /* ChartView.swift in Sources */,
-				D5E551462956EB9900DB2312 /* ContentView.swift in Sources */,
 				D5C833212992CE1A0070E93B /* MarketData.swift in Sources */,
 				D57D857B29C653950028D957 /* SettingsView.swift in Sources */,
 				D59A492629C7203F00FDB4F6 /* LaunchView.swift in Sources */,

@@ -25,7 +25,9 @@ struct SwiftyCryptoApp: App {
                 NavigationView {
                     HomeView()
                         .navigationBarHidden(true)
-                }.environmentObject(homeViewModel)
+                }
+                .navigationViewStyle(.stack)
+                .environmentObject(homeViewModel)
                 
                 ZStack {
                     if showLaunchView {

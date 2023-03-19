@@ -32,7 +32,9 @@ struct PortfolioView: View {
                     }
                     
                 }
-            }.navigationTitle("Edit Portfolio")
+            }
+            .background(Color.theme.background)
+            .navigationTitle("Edit Portfolio")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         XMark { dismiss() }

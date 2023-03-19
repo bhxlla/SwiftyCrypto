@@ -111,6 +111,7 @@ extension HomeView {
                     .onTapGesture {
                         goToDetail(coin)
                     }
+                    .listRowBackground(Color.theme.background)
             }
         }.listStyle(.plain)
     }
@@ -124,6 +125,7 @@ extension HomeView {
                     .onTapGesture {
                         goToDetail(coin)
                     }
+                    .listRowBackground(Color.theme.background)
             }
         }.listStyle(.plain)
     }

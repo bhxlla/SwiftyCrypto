@@ -15,6 +15,8 @@ struct SwiftyCryptoApp: App {
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
+        UINavigationBar.appearance().tintColor = UIColor(.theme.accent)
+        UITableView.appearance().backgroundColor = UIColor(.theme.background)
     }
     
     @StateObject private var homeViewModel = HomeViewModel()

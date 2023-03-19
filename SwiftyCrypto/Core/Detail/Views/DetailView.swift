@@ -70,7 +70,9 @@ struct DetailView: View {
                     
                 }.padding(.horizontal)
             }
-        }.navigationTitle(coin.name)
+        }
+        .background(Color.theme.background)
+        .navigationTitle(coin.name)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     HStack {

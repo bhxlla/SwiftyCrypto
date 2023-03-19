@@ -19,6 +19,7 @@ class CoinImageService {
         guard let url = URL(string: url) else { return }
         cancellable = NetworkManager.download(for: url)
             .tryMap(UIImage.init(data:))
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 if case let .failure(err) = result {
                     print(err.localizedDescription)

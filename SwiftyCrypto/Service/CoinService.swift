@@ -25,6 +25,7 @@ class CoinService {
         
         cancellable = NetworkManager.download(for: url)
             .decode(type: [Coin].self, decoder: decoder)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 if case let .failure(err) = result {
                     print(err.localizedDescription)

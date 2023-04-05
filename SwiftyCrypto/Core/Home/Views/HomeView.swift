@@ -114,6 +114,9 @@ extension HomeView {
                     .listRowBackground(Color.theme.background)
             }
         }.listStyle(.plain)
+            .refreshable {
+                reloadData()
+            }
     }
     
     private var portfolioCoins: some View {
@@ -167,9 +170,7 @@ extension HomeView {
             .frame(minWidth: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
             
             Button {
-                withAnimation(.linear(duration: 2)) {
-                    vm.reloadData()
-                }
+                reloadData()
             } label: {
                 Image(systemName: "goforward")
             }.rotationEffect(vm.isReloading ? .degrees(360) : .zero)
@@ -178,6 +179,12 @@ extension HomeView {
         .font(.caption)
         .foregroundColor(.theme.secondaryText)
         .padding(.horizontal)
+    }
+    
+    func reloadData() {
+        withAnimation(.linear(duration: 2)) {
+            vm.reloadData()
+        }
     }
     
     func goToDetail(_ coin: Coin) {

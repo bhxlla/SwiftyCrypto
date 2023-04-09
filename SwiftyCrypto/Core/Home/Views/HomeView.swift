@@ -18,6 +18,8 @@ struct HomeView: View {
     
     @State var infoSelected: Bool = false
     
+    @State var errorMsg: String = ""
+    
     var body: some View {
         ZStack {
             Color.theme.background
@@ -47,6 +49,11 @@ struct HomeView: View {
             }
             .sheet(isPresented: $infoSelected) {
                 SettingsView()
+            }
+            .overlay(alignment: .bottom) {
+                if !errorMsg.isEmpty {
+                    errorToast
+                }
             }
             
         }.background {
@@ -179,6 +186,26 @@ extension HomeView {
         .font(.caption)
         .foregroundColor(.theme.secondaryText)
         .padding(.horizontal)
+    }
+    
+    private var errorToast: some View {
+        HStack {
+            Text(errorMsg)
+                .font(.callout)
+                .fontWeight(.medium)
+        }
+        .frame(maxWidth: .infinity, maxHeight: 54)
+        .background {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.theme.red)
+        }
+        .transition(
+            .move(edge: .bottom)
+            .combined(with: .opacity)
+        )
+        .onAppear {
+            vm.errorDisplayed()
+        }
     }
     
     func reloadData() {

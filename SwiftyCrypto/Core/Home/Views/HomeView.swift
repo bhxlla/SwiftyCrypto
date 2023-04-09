@@ -55,6 +55,11 @@ struct HomeView: View {
                     errorToast
                 }
             }
+            .onReceive(vm.$errorMessage) { msg in
+                withAnimation(.spring()) {
+                    errorMsg = msg
+                }
+            }
             
         }.background {
             NavigationLink(destination: DetailScreen(coin: $selectedNavCoin), isActive: $showDetail) {
@@ -120,10 +125,31 @@ extension HomeView {
                     }
                     .listRowBackground(Color.theme.background)
             }
+        
+            if showBottomLoader {
+                bottomLoader
+            }
+
         }.listStyle(.plain)
             .refreshable {
                 reloadData()
             }
+    }
+    
+    private var showBottomLoader: Bool {
+        !vm.allCoins.isEmpty
+    }
+    
+    private var bottomLoader: some View {
+        VStack {
+            if vm.pagination.loading {
+                ProgressView()
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .onAppear {
+            vm.loadMore()
+        }
     }
     
     private var portfolioCoins: some View {

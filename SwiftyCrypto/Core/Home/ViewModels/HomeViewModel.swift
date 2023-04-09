@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class HomeViewModel: ObservableObject {
     
@@ -45,17 +46,23 @@ class HomeViewModel: ObservableObject {
     @Published var statistics: [Statistics] = .init()
     @Published var isReloading = false
     @Published var sortType: SortType = .holding
+    @Published var errorMessage: String = ""
     
     private let service: CoinService = CoinService()
     private let marketService: MarketService = MarketService()
     private let dataService: PortfolioDataService = PortfolioDataService()
+    
+    @Published var pagination: (page: Int, loading: Bool) = (1, false)
     
     init() {
         subscribeToCoins()
     }
     
     func subscribeToCoins(){
-        service.$allCoins
+        
+        service.$allCoin
+            .map(\.data)
+            .compactMap { coins in coins.isEmpty ? nil : coins }
             .combineLatest($searchText, $sortType)
             .debounce(for: .seconds(0.6), scheduler: DispatchQueue.main)
             .map { (coins, text, sort) in
@@ -69,6 +76,10 @@ class HomeViewModel: ObservableObject {
             }
             .assign(to: &$allCoins)
 
+        service.$allCoin
+            .map(\.message)
+            .assign(to: &$errorMessage)
+        
         $allCoins
             .combineLatest(dataService.$portfolio)
             .compactMap { (coins: [Coin], portfolios: [Portfolio]) -> [Coin] in
@@ -110,6 +121,25 @@ class HomeViewModel: ObservableObject {
             .map { coins, marketService in false }
             .assign(to: &$isReloading)
         
+        $allCoins
+            .dropFirst()
+            .map { $0.isEmpty ? 0 : 1 }
+            .map { [weak self] value in ((self?.pagination.page ?? 1) + value, false) }
+            .assign(to: &$pagination)
+    }
+    
+    func errorDisplayed() {
+        Just("")
+            .delay(for: .seconds(2), scheduler: DispatchQueue.main)
+            .map{ _ in "" }
+            .assign(to: &$errorMessage)
+    }
+    
+    func loadMore() {
+        if !errorMessage.isEmpty && pagination.loading { return }
+        let page = pagination.page
+        pagination.loading = true
+        service.getCoins(for: page)
     }
     
     func updateFolio(coin: Coin, amount: Double) {
@@ -122,9 +152,15 @@ class HomeViewModel: ObservableObject {
     
     func reloadData() {
         isReloading = true
+        pagination.page = 1 // Will start from page 1 again...
         service.getCoins()
         marketService.getData()
         HapticManager.notify(type: .success)
     }
     
+}
+
+
+extension Array {
+    var isNotEmpty: Bool { !isEmpty }
 }

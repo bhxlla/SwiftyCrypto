@@ -22,3 +22,12 @@ This app was made by following a <a href="https://www.youtube.com/playlist?list=
 - Uses NSCache to store and retrieve Detail page data.
 - Uses SwiftUI path view to generate 7 day price Chart View.
 - Uses Custom Gestures (Pan) on ChartView to show price.
+
+### Screenshots
+
+<p>
+<img src="https://i.imgur.com/og1BW9X.png" height="400">
+<img src="https://i.imgur.com/dUjIfYq.png" height="400">
+<img src="https://i.imgur.com/hKeJHIe.png" height="400">
+<img src="https://i.imgur.com/DCS7iJK.png" height="400">
+</p>
